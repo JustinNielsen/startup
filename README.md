@@ -1,7 +1,7 @@
 # Goal Tracker
 
 ## SSH Into the Server
-ssh -i ~/Documents/keys/production.pem ubuntu@18.217.118.225
+ssh -i ~/Documents/keys/production.pem ubuntu@18.190.146.155
 
 ## Design
 
