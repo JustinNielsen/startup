@@ -7,7 +7,7 @@ store and keep track of your goals. My hope is that using this application will 
 is the small things we do every day that determine our future. Not only will you be able to store your goals you will also be able to see
 personalized statistics of the progress you have made.
 
-[](startup_design.png)
+![Design for a simple goal application](startup_design.png)
 
 Key Features:
 
