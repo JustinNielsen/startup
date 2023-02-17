@@ -29,3 +29,6 @@ I learned how to use git in VS code which I have never done before. I've always 
 **_Simon HTML_**
 I learned how to organize html elements effectivly using a header, main, and footer in the body of the html. I also learned how to organize a
 table with a header when setting up the scores page of the simon clone.
+
+**_Simon CSS_**
+I learned how to effectively use bootstrap and css in tandem to create an asthetically appealing website. I thought it was a bit repetitive to reimplement the header and footer for each page so I am looking forward to getting into more modular designs with react. I also learned more about the bootstrap fluid container.
