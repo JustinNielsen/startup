@@ -32,3 +32,5 @@ table with a header when setting up the scores page of the simon clone.
 
 **_Simon CSS_**
 I learned how to effectively use bootstrap and css in tandem to create an asthetically appealing website. I thought it was a bit repetitive to reimplement the header and footer for each page so I am looking forward to getting into more modular designs with react. I also learned more about the bootstrap fluid container.
+
+**_Start Up HTML and CSS_**
