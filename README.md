@@ -34,3 +34,5 @@ table with a header when setting up the scores page of the simon clone.
 I learned how to effectively use bootstrap and css in tandem to create an asthetically appealing website. I thought it was a bit repetitive to reimplement the header and footer for each page so I am looking forward to getting into more modular designs with react. I also learned more about the bootstrap fluid container.
 
 **_Start Up HTML and CSS_**
+I learned a lot about using rows and columns with bootstrap and eventually found that the best attribute for each column in a row is col-auto. It just does what I expect. I also learned that if you want objects on complete
+opposite sides of a row use justify-content-between. Another very useful thing that I learned was to use list-group on a list to quickly and easily make a list look a lot better. When using bootstrap to its fullest very little css needs to be placed in a seperate file so a majority of the code lies right with the html.
