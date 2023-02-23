@@ -40,5 +40,48 @@
         </ul>
       </div>
     </main>
+
+    <footer class="row mx-1">
+      <div class="container-fluid col-lg-3 mt-2">
+        <div class="rounded bg-dark text-light text-center p-2">
+          <h1>Goals Completed</h1>
+          <div class="m-4 progress">
+            <div class="progress bg-success" role="progressbar" style="width: 50%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid col-lg-3 mt-2">
+        <div class="rounded bg-dark text-light text-center p-2">
+          <h1>Total Goals: <span id="complete-goals">2</span></h1>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h4>Complete: <span id="complete-count">1</span></h4>
+            </li>
+            <li class="list-group-item">
+              <h4>In Progress: <span id="in-progress-count">0</span></h4>
+            </li>
+            <li class="list-group-item">
+              <h4>Incomplete: <span id="incomplete-count">1</span></h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container-fluid col-lg-3 mt-2">
+        <div class="rounded bg-dark text-light text-center p-2">
+          <h1>Sitewide Completed Goals</h1>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h1 id="sitewide-completed-goals">0</h1>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container-fluid col-lg-3 mt-2">
+        <div class="rounded bg-dark text-light text-center p-2">
+          <h1>Dad Joke API</h1>
+          <p id="dad-joke">{Dad Joke Here}</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
