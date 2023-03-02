@@ -36,3 +36,6 @@ I learned how to effectively use bootstrap and css in tandem to create an asthet
 **_Start Up HTML and CSS_**
 I learned a lot about using rows and columns with bootstrap and eventually found that the best attribute for each column in a row is col-auto. It just does what I expect. I also learned that if you want objects on complete
 opposite sides of a row use justify-content-between. Another very useful thing that I learned was to use list-group on a list to quickly and easily make a list look a lot better. When using bootstrap to its fullest very little css needs to be placed in a seperate file so a majority of the code lies right with the html.
+
+**_Simon Javascript_**
+The most interesting thing I learend from the simon javascript project was the use of localStorage to save data between runs of the code. Initially I thought this kind of process would be more difficult than it is. However, this is done quite simply by using a string as a key to the data and accessing it later with that string key. I also learned that a great way to select elements that are needed for javascript functionality is by their id using querySelector.
