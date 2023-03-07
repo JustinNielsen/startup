@@ -39,3 +39,193 @@ opposite sides of a row use justify-content-between. Another very useful thing t
 
 **_Simon Javascript_**
 The most interesting thing I learend from the simon javascript project was the use of localStorage to save data between runs of the code. Initially I thought this kind of process would be more difficult than it is. However, this is done quite simply by using a string as a key to the data and accessing it later with that string key. I also learned that a great way to select elements that are needed for javascript functionality is by their id using querySelector.
+
+## Console Commands
+- **echo** - Output the parameters of the command
+- **cd** - Change directory
+- **mkdir** - Make directory
+- **rmdir** - Remove directory
+- **rm** - Remove file(s)
+- **mv** - Move file(s)
+- **cp** - Copy files
+- **ls** - List files
+- **curl** - Command line client URL browser
+- **grep** - Regular expression search
+- **find** - Find files
+- **top** - View running processes with CPU and memory usage
+- **df** - View disk statistics
+- **cat** - Output the contents of a file
+- **less** - Interactively output the contents of a file
+- **wc** - Count the words in a file
+- **ps** - View the currently running processes
+- **kill** - Kill a currently running process
+- **sudo** - Execute a command as a super user (admin)
+- **ssh** - Create a secure shell on a remote computer
+- **scp** - Securely copy files to a remote computer
+- **history** - Show the history of commands
+- **ping** - Check if a website is up
+- **tracert** - Trace the connections to a website
+- **dig** - Show the DNS information for a domain
+- **man** - Look up a command in the manual
+- **chmod** - Makes a script executable
+
+- `|` - Take the output from the command on the left and _pipe_, or pass, it to the command on the right
+- `>` - Redirect output to a file. Overwrites the file if it exists
+- `>>` - Redirect output to a file. Appends if the file exists
+
+## DNS
+- **NS** - contains the names of the authoratative name servers taht aurhoize you to place DNS records in this DNS server.
+- **SOA** - Start of Authority. Provides contact information about the owner of this domain name.
+- **CNAME** - Point to another DNS record.
+- **A** - Point to an IP address.
+
+## HTML
+| element   | meaning                                                                |
+| --------- | ---------------------------------------------------------------------- |
+| `html`    | The page container                                                     |
+| `head`    | Header information                                                     |
+| `title`   | Title of the page                                                      |
+| `meta`    | Metadata for the page such as character set or viewport settings       |
+| `script`  | JavaScript reference. Either a external reference, or inline           |
+| `include` | External content reference                                             |
+| `body`    | The entire content body of the page                                    |
+| `header`  | Header of the main content                                             |
+| `footer`  | Footer of the main content                                             |
+| `nav`     | Navigational inputs                                                    |
+| `main`    | Main content of the page                                               |
+| `section` | A section of the main content                                          |
+| `aside`   | Aside content from the main content                                    |
+| `div`     | A block division of content                                            |
+| `span`    | An inline span of content                                              |
+| `h<1-9>`  | Text heading. From h1, the highest level, down to h9, the lowest level |
+| `p`       | A paragraph of text                                                    |
+| `b`       | Bring attention                                                        |
+| `table`   | Table                                                                  |
+| `tr`      | Table row                                                              |
+| `th`      | Table header                                                           |
+| `td`      | Table data                                                             |
+| `ol,ul`   | Ordered or unordered list                                              |
+| `li`      | List item                                                              |
+| `a`       | Anchor the text to a hyperlink - use href for link                     |
+| `img`     | Graphical image reference                                              |
+| `dialog`  | Interactive component such as a confirmation                           |
+| `form`    | A collection of user input                                             |
+| `input`   | User input field                                                       |
+| `audio`   | Audio content                                                          |
+| `video`   | Video content                                                          |
+| `svg`     | Scalable vector graphic content                                        |
+| `iframe`  | Inline frame of another HTML page                                      |
+
+HTML Comments
+```html
+<!-- commented text -->
+```
+
+HTML Form Input
+| Element    | Meaning                          | Example                                        |
+| ---------- | -------------------------------- | ---------------------------------------------- |
+| `form`     | Input container and submission   | `<form action="form.html" method="post">`      |
+| `fieldset` | Labeled input grouping           | `<fieldset> ... </fieldset>`                   |
+| `input`    | Multiple types of user input     | `<input type="" />`                            |
+| `select`   | Selection dropdown               | `<select><option>1</option></select>`          |
+| `optgroup` | Grouped selection dropdown       | `<optgroup><option>1</option></optgroup>`      |
+| `option`   | Selection option                 | `<option selected>option2</option>`            |
+| `textarea` | Multiline text input             | `<textarea></textarea>`                        |
+| `label`    | Individual input label           | `<label for="range">Range: </label>`           |
+| `output`   | Output of input                  | `<output for="range">0</output>`               |
+| `meter`    | Display value with a known range | `<meter min="0" max="100" value="50"></meter>` |
+
+## CSS
+
+**CSS Box Model** - Outside to in: margin -> border -> padding -> content
+**Padding** - Puts space around the content of the selected element
+
+**Basic Selector** - body {}
+**Class Selector** - .input {}
+**ID Selector** - #main-content {}
+**Attribute Selector** - p[class='summary'] {}
+**Psudo Selector** - section:hover {}
+**Combination of Selectors** - div .input {} = Inputs with a class of 'input' with a parent that is a div.
+
+| Combinator       | Meaning                    | Example        | Description                                |
+| ---------------- | -------------------------- | -------------- | ------------------------------------------ |
+| Descendant       | A list of descendants      | `body section` | Any section that is a descendant of a body |
+| Child            | A list of direct children  | `section > p`  | Any p that is a direct child of a section  |
+| General sibling  | A list of siblings         | `p ~ div`      | Any p that has a div sibling               |
+| Adjacent sibling | A list of adjacent sibling | `p + div`      | Any p that has an adjacent div sibling     |
+
+## Javascript
+Ways to add javascript in HTML
+- `<script>2+2</script>`
+- `<script src='main.js'/>`
+- `<div onclick='1+1'></div>`
+
+**Javascript object** - { n: 1 }
+
+## Javascript Functions
+
+**Basic Functions**
+- `function f(x) {}`
+- `const f = function(x) {}`
+
+**Arrow Functions**
+- `const f = (x) => {}`
+- `(a, b) => a + b`
+
+**Promises**
+- If it resolves calls 'then' and not 'catch'
+- If it rejects or throws an exception calls 'catch' and not 'then'
+- Always calls 'finally'
+- Works off to the side so code after the promise starts could get called before code in the promise runs
+
+**Async and Await**
+- Calling an async functio nwith await waits for the function to finish before executing further.
+
+## Javascript DOM
+- **document.querySelectorAll('p')** - selects all paragraph elements in the document
+- **document.querySelector('p')** - selects the first paragraph element in the document
+- **el.parentElement.removeChild(el)** - removes the element el from the document
+- **el.appendChild(newChild)** - Inserts newChild as a child of el
+- **el.textContext** - contains all of the elements text
+- **el.innerHTML** - contains a textual representation of an elements HTML content. Can inject entire blocks of code using this.
+
+## JSON
+```json
+{
+  "class": {
+    "title": "web programming",
+    "description": "Amazing"
+  },
+  "enrollment": ["Marco", "Jana", "فَاطِمَة"],
+  "start": "2025-02-01",
+  "end": null
+}
+```
+
+## Regular Expressions
+`text.match(/A|f/i)`
+Matches if text contains a capital or lowercase A or f
+
+## Rest and Spread
+
+**Rest**
+```js
+function hasNumber(test, ...numbers) {
+  return numbers.some((i) => i === test);
+}
+
+hasNumber(2, 1, 2, 3);
+// RETURNS: true
+```
+
+**Spread**
+```js
+function person(firstName, lastName) {
+  return { first: firstName, last: lastName };
+}
+
+const p = person(...['Ryan', 'Dahl']);
+console.log(p);
+// OUTPUT: {first: 'Ryan', last: 'Dahl'}
+```
+
