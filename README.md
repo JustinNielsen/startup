@@ -137,15 +137,15 @@ HTML Form Input
 
 ## CSS
 
-**CSS Box Model** - Outside to in: margin -> border -> padding -> content
-**Padding** - Puts space around the content of the selected element
-
-**Basic Selector** - body {}
-**Class Selector** - .input {}
-**ID Selector** - #main-content {}
-**Attribute Selector** - p[class='summary'] {}
-**Psudo Selector** - section:hover {}
-**Combination of Selectors** - div .input {} = Inputs with a class of 'input' with a parent that is a div.
+- **CSS Box Model** - Outside to in: margin -> border -> padding -> content
+- **Padding** - Puts space around the content of the selected element
+- **Load Fonts** - @import url('font.url')
+- **Basic Selector** - body {}
+- **Class Selector** - .input {}
+- **ID Selector** - #main-content {}
+- **Attribute Selector** - p[class='summary'] {}
+- **Psudo Selector** - section:hover {}
+- **Combination of Selectors** - div .input {} = Inputs with a class of 'input' with a parent that is a div.
 
 | Combinator       | Meaning                    | Example        | Description                                |
 | ---------------- | -------------------------- | -------------- | ------------------------------------------ |
