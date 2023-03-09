@@ -14,7 +14,6 @@
     />
     <link href="https://getbootstrap.com/docs/5.1/assets/css/docs.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="goals.js"></script>
   </head>
   <body>
     <header class="overflow-hidden">
@@ -36,62 +35,7 @@
         <button id="add-goal" class="col-auto btn btn-primary mr-2" onclick="addGoal()">Add Goal</button>
       </div>
       <div class="container-fluid rounded">
-        <ul class="list-group" id="goals-list">
-          <li id="Read the scriptures" class="row list-group-item border border-3">
-            <div class="row justify-content-between">
-              <h3 class="col-auto">Read the Scriptures</h3>
-              <div class="col-auto">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options-outlined"
-                  id="Read the scriptures success"
-                  autocomplete="off"
-                />
-                <label class="btn btn-outline-success" for="Read the scriptures success">Complete</label>
-
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options-outlined"
-                  id="Read the scriptures danger"
-                  autocomplete="off"
-                  checked
-                />
-                <label class="btn btn-outline-danger" for="Read the scriptures danger">Incomplete</label>
-
-                <button class="btn" onclick="deleteGoal('Read the scriptures')"><i class="fa fa-trash"></i></button>
-              </div>
-            </div>
-          </li>
-          <li class="row list-group-item border border-3">
-            <div class="row justify-content-between">
-              <h3 class="col-auto">Eat good food</h3>
-              <div class="col-auto">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="Eat good food"
-                  id="Eat good food success"
-                  autocomplete="off"
-                />
-                <label class="btn btn-outline-success" for="Eat good food success">Complete</label>
-
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="Eat good food"
-                  id="Eat good food danger"
-                  autocomplete="off"
-                  checked
-                />
-                <label class="btn btn-outline-danger" for="Eat good food danger">Incomplete</label>
-
-                <button class="btn"><i class="fa fa-trash"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <ul class="list-group" id="goals-list"></ul>
       </div>
     </main>
 
@@ -110,9 +54,6 @@
           <ul class="list-group">
             <li class="list-group-item">
               <h4>Complete: <span id="complete-count">1</span></h4>
-            </li>
-            <li class="list-group-item">
-              <h4>In Progress: <span id="in-progress-count">0</span></h4>
             </li>
             <li class="list-group-item">
               <h4>Incomplete: <span id="incomplete-count">1</span></h4>
@@ -142,5 +83,7 @@
       <span class="text-reset">Author: Justin Nielsen</span>
       <a class="text-reset" href="https://github.com/JustinNielsen/startup">Github</a>
     </div>
+
+    <script src="goals.js"></script>
   </body>
 </html>
