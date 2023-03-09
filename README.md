@@ -40,6 +40,9 @@ opposite sides of a row use justify-content-between. Another very useful thing t
 **_Simon Javascript_**
 The most interesting thing I learend from the simon javascript project was the use of localStorage to save data between runs of the code. Initially I thought this kind of process would be more difficult than it is. However, this is done quite simply by using a string as a key to the data and accessing it later with that string key. I also learned that a great way to select elements that are needed for javascript functionality is by their id using querySelector.
 
+**_Start Up Javascript_**
+I learned a lot about injecting html using javascript. One of the problems I was facing was that I needed to inject list items that contained buttons that did different things based on the parent element. I learned the importance of having a unique id for each list item so that I can access it using javascript. I also learned that you can put parameters on onclick functions even when injecting html. Initially I thought I would need to use addEventListener but it worked to have a paramatized function injected into the html.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
