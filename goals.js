@@ -8,6 +8,8 @@ function load() {
   for (const goal of goals) {
     addNewGoal(goal);
   }
+
+  updateCounts(goals);
 }
 
 load();
@@ -40,7 +42,30 @@ function updateGoal(goalTitle, complete) {
     goals.push(newGoal);
   }
 
+  updateCounts(goals);
   localStorage.setItem("goals", JSON.stringify(goals));
+}
+
+function updateCounts(goals) {
+  let goalCount = goals.length;
+  let completeCount = 0;
+  let incompleteCount = 0;
+
+  for (const goal of goals) {
+    if (goal.complete) {
+      completeCount++;
+    } else {
+      incompleteCount++;
+    }
+  }
+
+  document.getElementById("complete-goals").textContent = goalCount.toString();
+  document.getElementById("complete-count").textContent = completeCount.toString();
+  document.getElementById("incomplete-count").textContent = incompleteCount.toString();
+  document.getElementById("sitewide-completed-goals").textContent = completeCount.toString();
+
+  let percentage = goalCount != 0 ? (completeCount / goalCount) * 100 : 0;
+  document.getElementById("progressbar").setAttribute("style", "width: " + percentage + "%");
 }
 
 function getGoals() {
@@ -72,6 +97,12 @@ function deleteGoal(goalName) {
 
   const listElement = document.getElementById(goalName);
   listElement.parentElement.removeChild(listElement);
+
+  let goals = getGoals();
+  let newGoals = goals.filter((goal) => goal.title != goalName);
+
+  updateCounts(newGoals);
+  localStorage.setItem("goals", JSON.stringify(newGoals));
 }
 
 function completeGoal(goalName) {
