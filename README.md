@@ -43,6 +43,9 @@ The most interesting thing I learend from the simon javascript project was the u
 **_Start Up Javascript_**
 I learned a lot about injecting html using javascript. One of the problems I was facing was that I needed to inject list items that contained buttons that did different things based on the parent element. I learned the importance of having a unique id for each list item so that I can access it using javascript. I also learned that you can put parameters on onclick functions even when injecting html. Initially I thought I would need to use addEventListener but it worked to have a paramatized function injected into the html.
 
+**_Simon Service_**
+From this project I learned a lot about combining expresss with existing code. For example storing the scores was previously completly reliant on localStorage to save the scores but with the addition of the service we are still using localStorage to save scores but we combine that with getting scores from the /api/scores endpoint and adding those to the localStorage so that localStorage and endpoint scores are saved in the same location. I thought it was a really neat way to keep track of scores.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
