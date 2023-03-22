@@ -46,6 +46,9 @@ I learned a lot about injecting html using javascript. One of the problems I was
 **_Simon Service_**
 From this project I learned a lot about combining expresss with existing code. For example storing the scores was previously completly reliant on localStorage to save the scores but with the addition of the service we are still using localStorage to save scores but we combine that with getting scores from the /api/scores endpoint and adding those to the localStorage so that localStorage and endpoint scores are saved in the same location. I thought it was a really neat way to keep track of scores.
 
+**_Simon DB_**
+The process of using a mongodb in javascript goes as follows: create a database cluster on the mongodb website making sure that the correct ip address has access, install the mongodb npm module, add environment variables for username, password, and hostname, use the environment variables to crate a MongoClient, get references to the collections you need, and finally create and export functions that modify the databse collections such as adding, getting, removing and updating the collection. Then those exported functions can be used dynamically throughout the project to modify and retrieve content from the database.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
