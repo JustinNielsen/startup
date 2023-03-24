@@ -49,6 +49,9 @@ From this project I learned a lot about combining expresss with existing code. F
 **_Simon DB_**
 The process of using a mongodb in javascript goes as follows: create a database cluster on the mongodb website making sure that the correct ip address has access, install the mongodb npm module, add environment variables for username, password, and hostname, use the environment variables to crate a MongoClient, get references to the collections you need, and finally create and export functions that modify the databse collections such as adding, getting, removing and updating the collection. Then those exported functions can be used dynamically throughout the project to modify and retrieve content from the database.
 
+**_Simon Login_**
+There are two important things that I learned studying the code of this simon project. The first was proper error handling in regards to the login portion. For example when creating a user we first check if a user with that email is already in the database and throw an error if they are. A similar thing happens with the login but if the there is no user then it throws an error of being unauthorized. Another thing I learned was how to store an authorization token as a cookie, which is something I have never seen done before.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
