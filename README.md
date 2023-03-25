@@ -52,6 +52,9 @@ The process of using a mongodb in javascript goes as follows: create a database 
 **_Simon Login_**
 There are two important things that I learned studying the code of this simon project. The first was proper error handling in regards to the login portion. For example when creating a user we first check if a user with that email is already in the database and throw an error if they are. A similar thing happens with the login but if the there is no user then it throws an error of being unauthorized. Another thing I learned was how to store an authorization token as a cookie, which is something I have never seen done before.
 
+**_Simon Websocket_**
+Websockets are the most complex thing we have learned so far so I would make sure to refer to peerProxy.js and play.js in simon-websocket project for specific info on how to set up. peerProxy.js handles creating a websocket, keeping track of the connections, keeping connections alive, closing connections, and forwarding messages. play.js configures the websocket with onopen, onclose, and onmessage listeneres, handles showing messages via html injection, and broadcasts events that occur during the game such as a game start and a game end with score.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
