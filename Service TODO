@@ -1,4 +1,5 @@
 TODO
+Note - use port 4000
 
 - npm init -y
 - npm install express
@@ -13,6 +14,7 @@ TODO
   - increment goal count
   - get goal count
 - Implement dad joke api
+- Implement web service to show who completed a goal most recently
 
 index.js file notes
 

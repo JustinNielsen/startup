@@ -2,7 +2,7 @@
   "name": "startup",
   "version": "1.0.0",
   "description": "ssh -i ~/Documents/keys/production.pem ubuntu@18.190.146.155",
-  "main": "goals.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
