@@ -1,0 +1,22 @@
+TODO
+
+- npm init -y
+- npm install express
+- .gitignore (node_modules)
+- index.js - not in public folder
+- public folder - all other js, html, and css files
+- Setup express endpoints for serving up files and other things (goals/username - for serving up the goals for the user. goals/total - for serving up the number of goals created sitewide.) (For help look at simon service github writeup)
+  - Create user
+  - Login user
+  - Get goals for user
+  - Add goal for user
+  - increment goal count
+  - get goal count
+- Implement dad joke api
+
+index.js file notes
+
+- const express = require('express');
+- const app = exp...................
+- app.use(express.json());
+- app.use(express.static('public'));
