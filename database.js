@@ -21,12 +21,17 @@ function getUser(username) {
   return usersCollection.findOne({ username: username });
 }
 
+function getUserByAuthtoken(authtoken) {
+  return usersCollection.findOne({ token: authtoken });
+}
+
 async function registerUser(username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = {
     username: username,
     password: password,
+    token: uuid.v4(),
   };
   await usersCollection.insertOne(user);
 
@@ -60,7 +65,19 @@ function getGoalsByUser(username) {
   return cursor.toArray;
 }
 
-function incrementCompleteGoals() {
+function getCompleteGoalCount() {
+  completeCount = siteCollection.findOne({ key: "CompleteGoalCount" });
+
+  if (completeCount) {
+    return completeCount.value;
+  } else {
+    const goalCount = { key: "CompleteGoalCount", value: 1 };
+    siteCollection.insertOne(goalCount);
+    return 1;
+  }
+}
+
+function incrementCompleteGoalCount() {
   currentCount = siteCollection.findOne({ key: "CompleteGoalCount" });
 
   if (currentCount) {
@@ -74,10 +91,12 @@ function incrementCompleteGoals() {
 
 module.exports = {
   getUser,
+  getUserByAuthtoken,
   registerUser,
   addGoal,
   updateGoal,
   removeGoal,
   getGoalsByUser,
-  incrementCompleteGoals,
+  getCompleteGoalCount,
+  incrementCompleteGoalCount,
 };
