@@ -14,6 +14,12 @@ function load() {
 
 load();
 
+function logout() {
+  fetch(`/api/auth/logout`, {
+    method: "delete",
+  }).then(() => (window.location.href = "login.html"));
+}
+
 function addGoal() {
   let goalEl = document.getElementById("form-goal");
   let goalTitle = goalEl.value;
