@@ -32,6 +32,8 @@ async function load() {
   displayAllGoals(goals);
 
   updateCounts(goals);
+
+  configureWebSocket();
 }
 
 load();
@@ -68,6 +70,10 @@ async function addGoal() {
 
 async function updateGoal(goalTitle, complete) {
   const username = localStorage.getItem("username");
+
+  if (complete) {
+    broadcastEvent(username);
+  }
 
   const response = await fetch("api/updateGoal", {
     method: "POST",
@@ -247,4 +253,27 @@ function incompleteGoal(goalName) {
   </div>`;
 
   return html;
+}
+
+// Functionality for peer communication using WebSocket
+
+function configureWebSocket() {
+  const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+  this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+  this.socket.onmessage = async (event) => {
+    const msg = JSON.parse(await event.data.text());
+    displayMsg(msg.from);
+  };
+}
+
+function displayMsg(from) {
+  const chatText = document.querySelector("#recent-complete");
+  chatText.innerHTML = `<span class="player">${from}</span> completed a goal`;
+}
+
+function broadcastEvent(from) {
+  const event = {
+    from: from,
+  };
+  this.socket.send(JSON.stringify(event));
 }
