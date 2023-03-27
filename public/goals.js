@@ -34,6 +34,8 @@ async function load() {
   updateCounts(goals);
 
   configureWebSocket();
+
+  displayJoke();
 }
 
 load();
@@ -276,4 +278,16 @@ function broadcastEvent(from) {
     from: from,
   };
   this.socket.send(JSON.stringify(event));
+}
+
+// API functionality
+
+function displayJoke() {
+  const jokeEl = document.querySelector("#joke");
+
+  fetch(
+    "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
+  )
+    .then((response) => response.json())
+    .then((data) => (jokeEl.innerHTML = data.joke));
 }
