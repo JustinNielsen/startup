@@ -32,11 +32,11 @@ async function register() {
   loginOrRegister("/api/auth/register");
 }
 
-async function loginOrRegister(endpiont) {
+async function loginOrRegister(endpoint) {
   const username = document.querySelector("#username")?.value;
   const password = document.querySelector("#password")?.value;
 
-  const response = await fetch(endpiont, {
+  const response = await fetch(endpoint, {
     method: "post",
     body: JSON.stringify({ username: username, password: password }),
     headers: {

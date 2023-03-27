@@ -38,54 +38,66 @@ async function registerUser(username, password) {
   return user;
 }
 
-function addGoal(username, goalTitle) {
+async function addGoal(username, goalTitle) {
   const goal = {
     username: username,
-    goal: goalTitle,
+    title: goalTitle,
     complete: false,
   };
 
-  goalsCollection.insertOne(goal);
+  await goalsCollection.insertOne(goal);
 }
 
-function updateGoal(goalTitle, complete) {
-  const filter = { goal: goalTitle };
+async function updateGoal(username, goalTitle, complete) {
+  const filter = { username: username, title: goalTitle };
   const update = { $set: { complete: complete } };
 
-  goalsCollection.updateOne(filter, update);
+  if (complete) {
+    incrementCompleteGoalCount();
+  }
+
+  await goalsCollection.updateOne(filter, update);
+
+  return await getGoalsByUser(username);
 }
 
-function removeGoal(goalTitle) {
-  goalsCollection.deleteOne({ goal: goalTitle });
+async function removeGoal(username, goalTitle) {
+  await goalsCollection.deleteOne({ username: username, title: goalTitle });
+
+  return await getGoalsByUser(username);
 }
 
 function getGoalsByUser(username) {
   const cursor = goalsCollection.find({ username: username });
 
-  return cursor.toArray;
+  return cursor.toArray();
 }
 
-function getCompleteGoalCount() {
-  completeCount = siteCollection.findOne({ key: "CompleteGoalCount" });
+function getGoal(username, goalTitle) {
+  return goalsCollection.findOne({ username: username, title: goalTitle });
+}
+
+async function getCompleteGoalCount() {
+  completeCount = await siteCollection.findOne({ key: "CompleteGoalCount" });
 
   if (completeCount) {
-    return completeCount.value;
+    return completeCount;
   } else {
-    const goalCount = { key: "CompleteGoalCount", value: 1 };
+    const goalCount = { key: "CompleteGoalCount", value: 0 };
     siteCollection.insertOne(goalCount);
-    return 1;
+    return JSON.stringify(goalCount);
   }
 }
 
-function incrementCompleteGoalCount() {
-  currentCount = siteCollection.findOne({ key: "CompleteGoalCount" });
+async function incrementCompleteGoalCount() {
+  currentCount = await siteCollection.findOne({ key: "CompleteGoalCount" });
 
   if (currentCount) {
     newCount = currentCount.value + 1;
-    siteCollection.updateOne({ key: "CompleteGoalCount" }, { $set: { value: newCount } });
+    await siteCollection.updateOne({ key: "CompleteGoalCount" }, { $set: { value: newCount } });
   } else {
     const goalCount = { key: "CompleteGoalCount", value: 1 };
-    siteCollection.insertOne(goalCount);
+    await siteCollection.insertOne(goalCount);
   }
 }
 
@@ -97,6 +109,7 @@ module.exports = {
   updateGoal,
   removeGoal,
   getGoalsByUser,
+  getGoal,
   getCompleteGoalCount,
   incrementCompleteGoalCount,
 };

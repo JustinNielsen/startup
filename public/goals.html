@@ -37,6 +37,18 @@
       <div class="container-fluid rounded">
         <ul class="list-group" id="goals-list"></ul>
       </div>
+
+      <!-- Error dialog -->
+      <div class="modal fade" id="msgModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-dark">
+            <div class="modal-body">error message here</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="row mx-1">
@@ -44,19 +56,19 @@
         <div class="rounded bg-dark text-light text-center p-2">
           <h1>Goals Completed</h1>
           <div class="m-4 progress">
-            <div class="progress bg-success" role="progressbar" id="progressbar" style="width: 50%"></div>
+            <div class="progress bg-success" role="progressbar" id="progressbar" style="width: 0%"></div>
           </div>
         </div>
       </div>
       <div class="container-fluid col-lg-3 mt-2">
         <div class="rounded bg-dark text-light text-center p-2">
-          <h1>Total Goals: <span id="complete-goals">2</span></h1>
+          <h1>Total Goals: <span id="complete-goals">0</span></h1>
           <ul class="list-group">
             <li class="list-group-item">
-              <h4>Complete: <span id="complete-count">1</span></h4>
+              <h4>Complete: <span id="complete-count">0</span></h4>
             </li>
             <li class="list-group-item">
-              <h4>Incomplete: <span id="incomplete-count">1</span></h4>
+              <h4>Incomplete: <span id="incomplete-count">0</span></h4>
             </li>
           </ul>
         </div>
@@ -85,5 +97,10 @@
     </div>
 
     <script src="goals.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

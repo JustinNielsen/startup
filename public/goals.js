@@ -1,58 +1,101 @@
+// Clears the local storate of all goals and user
 function clear() {
   localStorage.clear();
 }
 
-function load() {
-  let goals = getGoals();
-
-  for (const goal of goals) {
-    addNewGoal(goal);
-  }
-
-  updateCounts(goals);
-}
-
-load();
-
+// Logs the current user out returning to the login page
 function logout() {
   fetch(`/api/auth/logout`, {
     method: "delete",
   }).then(() => (window.location.href = "login.html"));
 }
 
-function addGoal() {
+// Gets the most recent goals from the database and inserts html of the goals
+async function load() {
+  let goals = [];
+  try {
+    // Get the latest goals from service
+    const username = localStorage.getItem("username");
+    const response = await fetch(`/api/goals/${username}`);
+    goals = await response.json();
+
+    // Save the goals in case we go offline in the future
+    localStorage.setItem("goals", JSON.stringify(goals));
+  } catch {
+    // If there was an error then just use the last saved goals
+    const goalsText = localStorage.getItem("goals");
+    if (goalsText) {
+      goals = JSON.parse(goals);
+    }
+  }
+
+  displayAllGoals(goals);
+
+  updateCounts(goals);
+}
+
+load();
+
+async function addGoal() {
   let goalEl = document.getElementById("form-goal");
   let goalTitle = goalEl.value;
   goalEl.value = "";
 
+  const username = localStorage.getItem("username");
+  const goal = { title: goalTitle, username: username };
+
   if (goalTitle != "") {
-    addNewGoal({ title: goalTitle, complete: false });
-    updateGoal(goalTitle, false);
+    const response = await fetch("api/addGoal", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(goal),
+    });
+
+    const goals = await response.json();
+
+    if (response?.status === 200) {
+      localStorage.setItem("goals", goals);
+      displayAllGoals(goals);
+      updateCounts(goals);
+    } else {
+      const modalEl = document.querySelector("#msgModal");
+      modalEl.querySelector(".modal-body").textContent = `⚠ Error: ${goals.msg}`;
+      const msgModal = new bootstrap.Modal(modalEl, {});
+      msgModal.show();
+    }
   }
 }
 
-function updateGoal(goalTitle, complete) {
-  let goals = getGoals();
-  const newGoal = { title: goalTitle, complete: complete };
+async function updateGoal(goalTitle, complete) {
+  const username = localStorage.getItem("username");
 
-  let found = false;
-  for (const goal of goals) {
-    if (goal.title == goalTitle) {
-      found = true;
-      goal.complete = complete;
-      break;
-    }
-  }
-
-  if (!found) {
-    goals.push(newGoal);
-  }
+  const response = await fetch("api/updateGoal", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ username: username, title: goalTitle, complete: complete }),
+  });
+  const goals = await response.json();
 
   updateCounts(goals);
   localStorage.setItem("goals", JSON.stringify(goals));
 }
 
-function updateCounts(goals) {
+async function deleteGoal(goalTitle) {
+  const username = localStorage.getItem("username");
+
+  const response = await fetch("api/deleteGoal", {
+    method: "DELETE",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ username: username, title: goalTitle }),
+  });
+  const goals = await response.json();
+
+  updateCounts(goals);
+  localStorage.setItem("goals", JSON.stringify(goals));
+  displayAllGoals(goals);
+}
+
+async function updateCounts(goals) {
   let goalCount = goals.length;
   let completeCount = 0;
   let incompleteCount = 0;
@@ -65,27 +108,29 @@ function updateCounts(goals) {
     }
   }
 
+  const response = await fetch("api/completeCount");
+  const siteCompleteCount = await response.json();
+
   document.getElementById("complete-goals").textContent = goalCount.toString();
   document.getElementById("complete-count").textContent = completeCount.toString();
   document.getElementById("incomplete-count").textContent = incompleteCount.toString();
-  document.getElementById("sitewide-completed-goals").textContent = completeCount.toString();
+  document.getElementById("sitewide-completed-goals").textContent = siteCompleteCount.value;
 
   let percentage = goalCount != 0 ? (completeCount / goalCount) * 100 : 0;
   document.getElementById("progressbar").setAttribute("style", "width: " + percentage + "%");
 }
 
-function getGoals() {
-  let goals = [];
-  const goalsText = localStorage.getItem("goals");
+// Takes in a list of goals and displays all of them on the page deleting any that were previously there
+function displayAllGoals(goals) {
+  const listElement = document.querySelector("#goals-list");
+  listElement.innerHTML = "";
 
-  if (goalsText != null) {
-    goals = JSON.parse(goalsText);
+  for (const goal of goals) {
+    displayGoal(goal);
   }
-
-  return goals;
 }
 
-function addNewGoal(goal) {
+function displayGoal(goal) {
   const listElement = document.querySelector("#goals-list");
 
   let html = goal.complete ? completeGoal(goal.title) : incompleteGoal(goal.title);
@@ -96,19 +141,6 @@ function addNewGoal(goal) {
   newChild.innerHTML = html;
 
   listElement.appendChild(newChild);
-}
-
-function deleteGoal(goalName) {
-  console.log("deleting " + goalName);
-
-  const listElement = document.getElementById(goalName);
-  listElement.parentElement.removeChild(listElement);
-
-  let goals = getGoals();
-  let newGoals = goals.filter((goal) => goal.title != goalName);
-
-  updateCounts(newGoals);
-  localStorage.setItem("goals", JSON.stringify(newGoals));
 }
 
 function completeGoal(goalName) {

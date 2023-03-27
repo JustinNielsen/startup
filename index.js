@@ -70,7 +70,7 @@ apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
   const authtoken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authtoken);
+  const user = await DB.getUserByAuthtoken(authtoken);
   if (user) {
     next();
   } else {
@@ -79,15 +79,31 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 // Get the goals of a user
-apiRouter.get("/goals", async (req, res) => {
-  const goals = await DB.getGoalsByUser(req.body.username);
+apiRouter.get("/goals/:username", async (req, res) => {
+  const goals = await DB.getGoalsByUser(req.params.username);
   res.send(goals);
 });
 
 // Add a goal for a user
 apiRouter.post("/addGoal", async (req, res) => {
-  await DB.addGoal(req.body.username, req.body.goal);
-  const goals = await DB.getGoalsByUser(req.body.username);
+  if (await DB.getGoal(req.body.username, req.body.title)) {
+    res.status(409).send({ msg: "Existing Goal" });
+  } else {
+    await DB.addGoal(req.body.username, req.body.title);
+    const goals = await DB.getGoalsByUser(req.body.username);
+    res.send(goals);
+  }
+});
+
+// Update a goal
+apiRouter.post("/updateGoal", async (req, res) => {
+  const goals = await DB.updateGoal(req.body.username, req.body.title, req.body.complete);
+  res.send(goals);
+});
+
+// Delete a goal
+apiRouter.delete("/deleteGoal", async (req, res) => {
+  const goals = await DB.removeGoal(req.body.username, req.body.title);
   res.send(goals);
 });
 
