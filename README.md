@@ -55,6 +55,9 @@ There are two important things that I learned studying the code of this simon pr
 **_Simon Websocket_**
 Websockets are the most complex thing we have learned so far so I would make sure to refer to peerProxy.js and play.js in simon-websocket project for specific info on how to set up. peerProxy.js handles creating a websocket, keeping track of the connections, keeping connections alive, closing connections, and forwarding messages. play.js configures the websocket with onopen, onclose, and onmessage listeneres, handles showing messages via html injection, and broadcasts events that occur during the game such as a game start and a game end with score.
 
+**_Startup Service_**
+The thing that I spent the most time on and learned the most about on this project was the communication from the page's javascript file to the endpoints in index.js and finally to the database and then back. It seems like a lot of jumping around files but it ends up being very organized when done right. I also learned how to implement websockets into the project and that part didn't take too long. In my startup the websocket is used when peopole complete goals so that the most recent person that completed a goal is shown on the page. I also added a simple programming joke api.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
