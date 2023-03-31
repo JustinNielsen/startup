@@ -58,6 +58,9 @@ Websockets are the most complex thing we have learned so far so I would make sur
 **_Startup Service_**
 The thing that I spent the most time on and learned the most about on this project was the communication from the page's javascript file to the endpoints in index.js and finally to the database and then back. It seems like a lot of jumping around files but it ends up being very organized when done right. I also learned how to implement websockets into the project and that part didn't take too long. In my startup the websocket is used when peopole complete goals so that the most recent person that completed a goal is shown on the page. I also added a simple programming joke api.
 
+**_Simon React_**
+The main backend files including index.js, database.js, and peerproxy.js remain the same in the transition to react. Index.html is altered to basically just have the root div. All the other page files (.jsx and .css) are placed in a new directory called src. Files are changed quite a bit to combine the javascript and html files together using react. Common things such as a footer are componitized and used as single line tags in files where needed, this includes the models as well. useState and useEffect are used to update the state of the page. This functions can often be used instead of html injection which will be useful for the startup when I am injecting a lot of html for the goals which is kind of nasty.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
