@@ -7,7 +7,7 @@ function clear() {
 function logout() {
   fetch(`/api/auth/logout`, {
     method: "delete",
-  }).then(() => (window.location.href = "login.html"));
+  }).then(() => (window.location.href = "index.html"));
 }
 
 // Gets the most recent goals from the database and inserts html of the goals
