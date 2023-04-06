@@ -1,16 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-.body {
-  font-family: "Open Sans", sans-serif;
+.main {
+  flex: 1 calc(100vh - 110px);
   display: flex;
   flex-direction: column;
-  min-width: 375px;
+  align-items: center;
+  justify-content: space-around;
 }
 
-header {
-  flex: 0 80px;
-}
-
-footer {
-  flex: 0 30px;
+.loginButton {
+  margin: 0.5em;
 }

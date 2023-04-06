@@ -2,6 +2,7 @@
   "name": "goals-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
