@@ -21,6 +21,7 @@ export function Goals() {
 
   useEffect(() => {
     load();
+    displayJoke();
   }, []);
 
   return (
@@ -133,8 +134,6 @@ export function Goals() {
     updateCounts(goals);
 
     //configureWebSocket();
-
-    displayJoke();
   }
 
   async function addGoal() {

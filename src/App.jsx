@@ -1,5 +1,6 @@
 import React from "react";
 
+import { NavLink, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { AuthState } from "./login/authState";
 import { Login } from "./login/login";
@@ -12,7 +13,10 @@ function App() {
   function logout() {
     fetch(`/api/auth/logout`, {
       method: "delete",
-    }).then(() => onAuthChange(userName, AuthState.Unauthenticated));
+    }).then(() => {
+      setAuthState(AuthState.Unauthenticated);
+      setUserName(userName);
+    });
   }
 
   // Asynchronously determine if the user is authenticated by calling the service
@@ -36,32 +40,55 @@ function App() {
 
   return (
     <div className="body">
-      <header className="overflow-hidden">
-        <div className="sticky-top bg-dark text-light row px-3 justify-content-between">
-          <h1 className="col-auto">Goals</h1>
+      <header className="container-fluid">
+        <nav className="navbar fixed-top bg-dark px-3">
+          <h1 className="col-auto text-light">Goals</h1>
+          <menu className="navbar-nav px-3">
+            <li className="nav-item">
+              <NavLink className="nav-link text-light" to="">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link text-light" to="about">
+                About
+              </NavLink>
+            </li>
+          </menu>
           {authState === AuthState.Authenticated && (
             <div className="col-auto row">
-              <form className="col-auto m-2" action="index.html">
+              <div className="col-auto m-2">
                 <button id="login" className="btn btn-primary" onClick={() => logout()}>
                   Logout
                 </button>
-              </form>
+              </div>
             </div>
           )}
-        </div>
+        </nav>
       </header>
 
-      {authState === AuthState.Authenticated && <Goals />}
-      {authState === AuthState.Unauthenticated && (
-        <Login
-          className="login"
-          userName={userName}
-          onAuthChange={(userName, authState) => {
-            setAuthState(authState);
-            setUserName(userName);
-          }}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            authState === AuthState.Authenticated ? (
+              <Goals />
+            ) : (
+              <Login
+                className="login"
+                userName={userName}
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState);
+                  setUserName(userName);
+                }}
+              />
+            )
+          }
+          exact
         />
-      )}
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
       <div className="container-fluid">
         <span className="text-reset">Author: Justin Nielsen </span>
@@ -71,6 +98,18 @@ function App() {
       </div>
     </div>
   );
+}
+
+function About() {
+  return (
+    <main className="container-fluid text-center">
+      Goals is a simple application that helps you maintain and keep track of your life goals.
+    </main>
+  );
+}
+
+function NotFound() {
+  return <main className="container-fluid text-center">404: Return to sender. Address unknown.</main>;
 }
 
 export default App;
