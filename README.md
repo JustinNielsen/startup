@@ -61,6 +61,9 @@ The thing that I spent the most time on and learned the most about on this proje
 **_Simon React_**
 The main backend files including index.js, database.js, and peerproxy.js remain the same in the transition to react. Index.html is altered to basically just have the root div. All the other page files (.jsx and .css) are placed in a new directory called src. Files are changed quite a bit to combine the javascript and html files together using react. Common things such as a footer are componitized and used as single line tags in files where needed, this includes the models as well. useState and useEffect are used to update the state of the page. This functions can often be used instead of html injection which will be useful for the startup when I am injecting a lot of html for the goals which is kind of nasty.
 
+##_Startup React_**
+I learned how to combine the use of services, node.js, mongodb, authentication, and websockets using react in this project. The services including the mongodb database, websocket, and authentication (index.js) were all mostly handled in their own folder and basically made up their own application that the react frontend would communicate with. The react frontend would use the functions provided by the services to make things work visually. I learned when devloping this project that I had to use node.js to run the services and then also run react seperatly to actually test the project. One thing I find intersting is that the react version of the app seems a bit slower.
+
 ## Console Commands
 - **echo** - Output the parameters of the command
 - **cd** - Change directory
