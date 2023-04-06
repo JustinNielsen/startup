@@ -42,7 +42,7 @@ function App() {
           {authState === AuthState.Authenticated && (
             <div className="col-auto row">
               <form className="col-auto m-2" action="index.html">
-                <button id="login" class="btn btn-primary" onClick={() => logout()}>
+                <button id="login" className="btn btn-primary" onClick={() => logout()}>
                   Logout
                 </button>
               </form>
@@ -64,7 +64,7 @@ function App() {
       )}
 
       <div className="container-fluid">
-        <span className="text-reset">Author: Justin Nielsen</span>
+        <span className="text-reset">Author: Justin Nielsen </span>
         <a className="text-reset" href="https://github.com/JustinNielsen/startup">
           Github
         </a>

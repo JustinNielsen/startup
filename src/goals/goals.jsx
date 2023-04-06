@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { MessageDialog } from "../login/messageDialog";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Goal } from "./goal";
@@ -14,13 +15,27 @@ export function Goals() {
   const [completeCount, setCompleteCount] = useState(0);
   const [incompleteCount, setIncompleteCount] = useState(0);
   const [sitewideCount, setSitewideCount] = useState(0);
+  const [joke, setJoke] = useState("");
+  const [webMessage, setWebMessage] = useState("");
+  const [displayError, setDisplayError] = useState(null);
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <>
       <main className="mt-3 mx-3">
         <div className="row mb-3 center" id="add-goal">
           <div className="col-auto">
-            <input type="text" id="form-goal" className="form-control" placeholder="New goal title" />
+            <input
+              type="text"
+              id="form-goal"
+              className="form-control"
+              onChange={(e) => setNewGoal(e.target.value)}
+              value={newGoal}
+              placeholder="New goal title"
+            />
           </div>
           <button
             id="add-goal"
@@ -78,7 +93,7 @@ export function Goals() {
             <ul className="list-group">
               <li className="list-group-item">
                 <h1 id="sitewide-completed-goals">{sitewideCount}</h1>
-                <p id="recent-complete"></p>
+                <p id="recent-complete">{webMessage}</p>
               </li>
             </ul>
           </div>
@@ -90,6 +105,8 @@ export function Goals() {
           </div>
         </div>
       </footer>
+
+      <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
     </>
   );
 
@@ -111,24 +128,20 @@ export function Goals() {
       }
     }
 
-    displayAllGoals(goals);
+    buildGoals(goals);
 
     updateCounts(goals);
 
-    configureWebSocket();
+    //configureWebSocket();
 
     displayJoke();
   }
 
   async function addGoal() {
-    let goalEl = document.getElementById("form-goal");
-    let goalTitle = goalEl.value;
-    goalEl.value = "";
-
     const username = localStorage.getItem("username");
-    const goal = { title: goalTitle, username: username };
+    const goal = { title: newGoal, username: username };
 
-    if (goalTitle != "") {
+    if (newGoal != "") {
       const response = await fetch("api/addGoal", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -139,22 +152,21 @@ export function Goals() {
 
       if (response?.status === 200) {
         localStorage.setItem("goals", goals);
-        displayAllGoals(goals);
+        buildGoals(goals);
         updateCounts(goals);
       } else {
-        const modalEl = document.querySelector("#msgModal");
-        modalEl.querySelector(".modal-body").textContent = `⚠ Error: ${goals.msg}`;
-        const msgModal = new bootstrap.Modal(modalEl, {});
-        msgModal.show();
+        setDisplayError(`⚠ Error: ${goals.msg}`);
       }
     }
+
+    setNewGoal("");
   }
 
   async function updateGoal(goalTitle, complete) {
     const username = localStorage.getItem("username");
 
     if (complete) {
-      broadcastEvent(username);
+      //broadcastEvent(username);
     }
 
     const response = await fetch("api/updateGoal", {
@@ -180,7 +192,7 @@ export function Goals() {
 
     updateCounts(goals);
     localStorage.setItem("goals", JSON.stringify(goals));
-    displayAllGoals(goals);
+    buildGoals(goals);
   }
 
   async function updateCounts(goals) {
@@ -208,51 +220,32 @@ export function Goals() {
     setPercentage(percentage);
   }
 
-  // Takes in a list of goals and displays all of them on the page deleting any that were previously there
-  function displayAllGoals(goals) {
-    const listElement = document.querySelector("#goals-list");
-    listElement.innerHTML = "";
+  function buildGoals(jsGoals) {
+    const builtGoals = [];
 
-    for (const goal of goals) {
-      displayGoal(goal);
+    for (const jsGoal of jsGoals) {
+      builtGoals.push(
+        <Goal goalName={jsGoal.title} complete={jsGoal.complete} updateGoal={updateGoal} deleteGoal={deleteGoal} />
+      );
     }
-  }
 
-  function displayGoal(goal) {
-    const listElement = document.querySelector("#goals-list");
-
-    let html = goal.complete ? completeGoal(goal.title) : incompleteGoal(goal.title);
-
-    const newChild = document.createElement("li");
-    newChild.setAttribute("id", goal.title);
-    newChild.setAttribute("class", "row list-group-item border border-3");
-    newChild.innerHTML = html;
-
-    listElement.appendChild(newChild);
-  }
-
-  function completeGoal(goalName) {
-    let goal = Goal(goalName, true, updateGoal, deleteGoal);
-  }
-
-  function incompleteGoal(goalName) {
-    let goal = Goal(goalName, false, updateGoal, deleteGoal);
+    setGoals(builtGoals);
   }
 
   // Functionality for peer communication using WebSocket
 
   function configureWebSocket() {
+    let port = window.location.port;
+    if (process.env.NODE_ENV !== "production") {
+      port = 3000;
+    }
+
     const protocol = window.location.protocol === "http:" ? "ws" : "wss";
     this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     this.socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
-      displayMsg(msg.from);
+      setWebMessage(msg.from);
     };
-  }
-
-  function displayMsg(from) {
-    const chatText = document.querySelector("#recent-complete");
-    chatText.innerHTML = `<span class="player">${from}</span> completed a goal`;
   }
 
   function broadcastEvent(from) {
@@ -271,6 +264,6 @@ export function Goals() {
       "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
     )
       .then((response) => response.json())
-      .then((data) => (jokeEl.innerHTML = data.joke));
+      .then((data) => setJoke(data.joke));
   }
 }
