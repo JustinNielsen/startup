@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { MessageDialog } from "../login/messageDialog";
+import { GoalEventNotifier } from "./goalNotifier";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Goal } from "./goal";
@@ -23,6 +24,18 @@ export function Goals() {
     load();
     displayJoke();
   }, []);
+
+  useEffect(() => {
+    GoalEventNotifier.addHandler(handleEvent);
+
+    return () => {
+      GoalEventNotifier.removeHandler(handleEvent);
+    };
+  });
+
+  function handleEvent(event) {
+    setWebMessage(`${event.from} completed a goal`);
+  }
 
   return (
     <>
@@ -132,8 +145,6 @@ export function Goals() {
     buildGoals(goals);
 
     updateCounts(goals);
-
-    //configureWebSocket();
   }
 
   async function addGoal() {
@@ -165,7 +176,7 @@ export function Goals() {
     const username = localStorage.getItem("username");
 
     if (complete) {
-      //broadcastEvent(username);
+      GoalEventNotifier.broadcastEvent(username);
     }
 
     const response = await fetch("api/updateGoal", {
@@ -210,7 +221,6 @@ export function Goals() {
     const response = await fetch("api/completeCount");
     const siteCompleteCount = await response.json();
 
-    // TODO - Make sure total count is getting updated, might need to use useState()
     setCompleteCount(completeCount);
     setIncompleteCount(incompleteCount);
     setSitewideCount(siteCompleteCount.value);
@@ -229,29 +239,6 @@ export function Goals() {
     }
 
     setGoals(builtGoals);
-  }
-
-  // Functionality for peer communication using WebSocket
-
-  function configureWebSocket() {
-    let port = window.location.port;
-    if (process.env.NODE_ENV !== "production") {
-      port = 3000;
-    }
-
-    const protocol = window.location.protocol === "http:" ? "ws" : "wss";
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    this.socket.onmessage = async (event) => {
-      const msg = JSON.parse(await event.data.text());
-      setWebMessage(msg.from);
-    };
-  }
-
-  function broadcastEvent(from) {
-    const event = {
-      from: from,
-    };
-    this.socket.send(JSON.stringify(event));
   }
 
   // API functionality
