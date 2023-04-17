@@ -253,3 +253,28 @@ console.log(p);
 // OUTPUT: {first: 'Ryan', last: 'Dahl'}
 ```
 
+
+# Final Kahoot Review Notes
+- Cookies Allow: A server to store data on the client
+- HTTP Header: Host, Content-Type, Cookie
+- Not an HTTP header: Language
+- Fetch can be used in front-end and back-end code
+- JSX purposes: inject your HTML into your JavaScript, componentize your HTML, allow for composability of your HTML
+- Not JSX purpose: combine CSS, HTML, and JavaScript
+- Linux Daemon: Starts when the computer is rebooted, executes independent of the user, PM2 is an example of a daemon
+- Linux Daemon not true: Cannot fork other processes
+- Hashing stored password is important because it improves security by making the password unreadable
+- Websockets allow for peer to peer communication instead of client-server communication only
+- React useEffect 2nd parameter [] = run once on start, [x] = run once on start and when x changes. No 2nd parameter means it will run whenever the page re-renders
+- Port 80 is reserved for HTTP
+- HTTP status codes in 300 range are for content redirects or caching
+- NPM install ws - doesn't add template code for websockets to your JavaScript
+- NPM install ws - adds dependency to package.json, adds websocket source code to the node directory, locks the version of the websocket package for your application
+
+# More Final Notes
+
+**Express** Some possible uses include app.(post, get, delete, use, put) 
+
+# TODO - add to notes for final
+- MongoDB regualar expresssions: $lt: 3 (less than 3), $or: [] (does one of the expressions in the array match)
+
